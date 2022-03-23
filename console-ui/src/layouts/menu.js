@@ -16,19 +16,20 @@
 
 import { isJsonString } from '../utils/nacosutil';
 
+// 配置管理
 const configurationMenu = {
   key: 'configurationManagementVirtual',
   children: [
     {
-      key: 'configurationManagement',
+      key: 'configurationManagement', // 配置列表
       url: '/configurationManagement',
     },
     {
-      key: 'historyRollback',
+      key: 'historyRollback', // 历史版本
       url: '/historyRollback',
     },
     {
-      key: 'listeningToQuery',
+      key: 'listeningToQuery', // 监听查询
       url: '/listeningToQuery',
     },
   ],
@@ -40,21 +41,21 @@ const authorityControlMenu = {
   key: 'authorityControl',
   children: [
     {
-      key: 'userList',
+      key: 'userList', // 用户列表
       url: '/userManagement',
     },
     {
-      key: 'roleManagement',
+      key: 'roleManagement', // 角色管理
       url: '/rolesManagement',
     },
     {
-      key: 'privilegeManagement',
+      key: 'privilegeManagement', // 权限管理
       url: '/permissionsManagement',
     },
   ],
 };
 
-export default function(model) {
+export function getMenuData(model) {
   const { token = '{}' } = localStorage;
   const { globalAdmin } = isJsonString(token) ? JSON.parse(token) || {} : {};
 
@@ -88,4 +89,47 @@ export default function(model) {
       ],
     },
   ].filter(item => item);
+}
+
+export default getMenuData;
+
+export function getMenus(model) {
+  return [
+    {
+      key: '应用运行监控',
+      children: [
+        { key: '节点运行监控', url: '/clusterManagement' },
+        { key: '服务运行监控', url: '/serviceManagement' },
+      ],
+    },
+    {
+      key: '服务注册管理',
+      url: '/configurationManagement',
+    },
+    {
+      key: '服务发布管理',
+      url: '/historyRollback',
+    },
+    {
+      key: '服务治理',
+      url: '/subscriberList',
+    },
+    {
+      key: '服务信息查询',
+      url: '/serviceManagement',
+    },
+    {
+      key: '服务运行监控',
+      url: '/listeningToQuery',
+    },
+    ...getMenuData(model).filter(
+      m =>
+        m &&
+        ![
+          'configurationManagementVirtual',
+          'serviceManagementVirtual',
+          'clusterManagementVirtual',
+        ].includes(m.key)
+    ),
+  ];
 }

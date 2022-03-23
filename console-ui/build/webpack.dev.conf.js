@@ -34,13 +34,15 @@ module.exports = Object.assign({}, base, {
     path: path.resolve(__dirname, '../dist'),
   },
   devServer: {
+    host: '0.0.0.0',
     port: process.env.PORT || 8000,
     proxy: [{
       context: ['/'],
       changeOrigin: true,
       secure: false,
-      target: 'http://localhost:8848',
-      pathRewrite: {'^/v1' : '/nacos/v1'}
+      // target: 'http://localhost:8848',
+      target: 'http://192.168.44.113:8848',
+      pathRewrite: { '^/v1': '/nacos/v1' }
     }],
     disableHostCheck: true,
     open: true,

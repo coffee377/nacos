@@ -59,6 +59,7 @@ const I18N_CONF = {
     userList: '用户列表',
     roleManagement: '角色管理',
     privilegeManagement: '权限管理',
+    operationMonitoring: '运行监控',
   },
   Password: {
     passwordNotConsistent: '两次输入密码不一致',

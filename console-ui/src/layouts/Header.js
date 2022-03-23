@@ -74,9 +74,11 @@ class Header extends React.Component {
     }
     return '';
   };
+
   indexAction = () => {
     this.props.history.push('/');
   };
+
   render() {
     const {
       locale = {},
@@ -102,12 +104,17 @@ class Header extends React.Component {
         <header className="header-container header-container-primary">
           <div className="header-body">
             <a href="#" onClick={this.indexAction} rel="noopener noreferrer">
-              <img
-                src="img/logo-2000-390.svg"
-                className="logo"
-                alt={siteConfig.name}
-                title={siteConfig.name}
-              />
+              {!siteConfig.customName && (
+                <img
+                  src="img/logo-2000-390.svg"
+                  className="logo"
+                  alt={siteConfig.name}
+                  title={siteConfig.name}
+                />
+              )}
+              {siteConfig.customName && (
+                <span className={'logo title'}>{siteConfig.customName}</span>
+              )}
             </a>
             {/* if is login page, we will show logout */}
             {pathname !== '/login' && (

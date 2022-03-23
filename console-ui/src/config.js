@@ -15,12 +15,14 @@
  */
 
 module.exports = {
+  name: '',
   server: '',
   PAGESIZE: 15,
   TIMERDEFAULT: '5s',
   TIMEDURINT: 2000,
   is_preview: process.env.NODE_ENV === 'development',
   projectName: 'nacos',
+  customName: '服务注册中心', // 增加自定义名称
   defaultLanguage: 'zh-cn',
   'en-us': {
     pageMenu: [

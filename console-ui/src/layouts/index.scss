@@ -27,11 +27,25 @@
   margin: 0 auto;
   height: 66px;
   line-height: 66px;
+
+  a:hover {
+    text-decoration: none;
+  }
 }
 .header-container .header-body .logo {
   margin-left: 40px;
   width: 96px;
   vertical-align: sub;
+  &.title {
+    font-size: 24px;
+    letter-spacing: 2px;
+    color: #fff;
+    opacity: 0.6;
+    text-decoration: none;
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
 .header-container .header-body .header-menu {
   float: right;

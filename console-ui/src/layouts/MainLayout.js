@@ -21,7 +21,7 @@ import PropTypes from 'prop-types';
 import { ConfigProvider, Icon, Menu } from '@alifd/next';
 import Header from './Header';
 import { getState } from '../reducers/base';
-import getMenuData from './menu';
+import { getMenuData, getMenus } from './menu';
 
 const { SubMenu, Item } = Menu;
 
@@ -81,7 +81,7 @@ class MainLayout extends React.Component {
 
   render() {
     const { locale = {}, version, functionMode } = this.props;
-    const MenuData = getMenuData(functionMode);
+    const MenuData = getMenus(functionMode);
     return (
       <>
         <Header />
@@ -105,14 +105,14 @@ class MainLayout extends React.Component {
                   {MenuData.map((subMenu, idx) => {
                     if (subMenu.children) {
                       return (
-                        <SubMenu key={String(idx)} label={locale[subMenu.key]}>
+                        <SubMenu key={String(idx)} label={locale[subMenu.key] || subMenu.key}>
                           {subMenu.children.map((item, i) => (
                             <Item
                               key={[idx, i].join('-')}
                               onClick={() => this.navTo(item.url)}
                               className={this.isCurrentPath(item.url)}
                             >
-                              {locale[item.key]}
+                              {locale[item.key] || item.key}
                             </Item>
                           ))}
                         </SubMenu>
@@ -126,7 +126,7 @@ class MainLayout extends React.Component {
                           .join(' ')}
                         onClick={() => this.navTo(subMenu.url)}
                       >
-                        {locale[subMenu.key]}
+                        {locale[subMenu.key] || subMenu.key}
                       </Item>
                     );
                   })}
